@@ -1,0 +1,1 @@
+docker build -t kanopole-vue:1.0 .

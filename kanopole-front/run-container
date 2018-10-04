@@ -1,0 +1,1 @@
+docker run -it --rm --name kanopole-vue -p 8001:8081 kanopole-vue:1.0

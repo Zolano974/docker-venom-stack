@@ -1,0 +1,18 @@
+version: "3"
+services:
+
+    kanopole_front:
+        container_name: kanopole-front
+        image: kanopole-vue:1.0
+        ports:
+            - "8001:8080"
+        volumes:
+            - ./kanopole-front/code:/app
+        tty: true
+        networks:
+            - kanopole
+        restart: on-failure:10
+
+networks:
+    kanopole:
+        driver: bridge
