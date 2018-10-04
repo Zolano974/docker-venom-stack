@@ -4,6 +4,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 
 var Post = require("../models/posts");
+var Item = require("../models/items");
 
 const app = express()
 app.use(morgan('combined'))
@@ -14,6 +15,7 @@ app.use(cors())
 var mongoose = require('mongoose');
 
 var DATABASE_URL = process.env.DATABASE_URL || 'http://localhost'
+console.log(DATABASE_URL)
 mongoose.connect(`mongodb://${DATABASE_URL}/posts`);
 
 var db = mongoose.connection;
@@ -27,7 +29,7 @@ app.get('/', (req, res) => {
   res.send('Hello Express!')
 })
 
-app.get('/items', (req, res) => {
+app.get('/mook', (req, res) => {
   res.send(JSON.stringify([
     {
       value: 121,
@@ -44,37 +46,39 @@ app.get('/items', (req, res) => {
   ]))
 })
 
-// // SERVER Setup 
-// app.get('/posts', (req, res) => {
-//   Post.find({}, 'title description', function (error, posts) {
-//     if (error) { console.error(error); }
-//     res.send({
-//       posts: posts
-//     })
-//   }).sort({_id:-1})
-// });
+// GET ITEMS
+app.get('/items', (req, res) => {
+  Item.find({}, 'value label', function (error, items) {
+    if (error) { console.error(error); }
+    res.send({
+      items: items
+    })
+  }).sort({_id:-1})
+});
 
 
-// // Post Endpoints
-// app.post('/posts', (req, res) => {
-//   var db = req.db;
-//   var title = req.body.title;
-//   var description = req.body.description;
-//   var new_post = new Post({
-//     title: title,
-//     description: description
-//   })
+// Post Endpoint
+app.post('/items', (req, res) => {
 
-//   new_post.save(function (error) {
-//     if (error) {
-//       console.log(error)
-//     }
-//     res.send({
-//       success: true,
-//       message: 'Post saved successfully!'
-//     })
-//   })
-// })
+  var db = req.db;
+  var value = req.body.value;
+  var label = req.body.label;
+
+  var newItem = new Item({
+    value: value,
+    label: label
+  })
+
+  newItem.save(function (error) {
+    if (error) {
+      console.log(error)
+    }
+    res.send({
+      success: true,
+      message: 'Item saved successfully!'
+    })
+  })
+})
 
 // // Fetch single post
 // app.get('/post/:id', (req, res) => {

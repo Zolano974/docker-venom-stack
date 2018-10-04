@@ -11,7 +11,12 @@
 
     <hr>
 
-    <div class="btn btn-default" @click="loadItemsFromApi">API call</div>
+    <div class="btn btn-default" @click="loadItemsFromApi">GET API items</div>
+
+    <hr>
+
+    <div class="btn btn-default" @click="createMookItems">CREATE API item</div>
+
  
   </div>
 </template>
@@ -29,7 +34,7 @@ export default {
     };
   },
   methods: {
-    loadItems() {
+    generateItems() {
       return [
         {
           value: 10,
@@ -42,20 +47,24 @@ export default {
       ];
     },
     async loadItemsFromApi() {
-
-      // Api.get("http://localhost:53000/")
-      // Api.get("/items")
-      // .then(function(response){
-      //   console.log(response.data)
-      // })
-      // .catch(err => {
-      //   console.error(err)
-      // })
-
+      
       try {
         //TODO: pourquoi est-ce qu'on doit renseigner ici les coordonées FROM HOST, et pas le nom du service tel que défini dans le docker-compose.yml ???
         // let newItems = await Api.get('http://kanopole-api:3000/')
         let response = await Api.get("/items");
+
+        console.log(response.data)
+
+        this.items = response.data.items
+
+      } catch (err) {
+        console.error(err)
+      }
+    },
+    async loadMookItems() {
+
+      try {
+        let response = await Api.get("/mook");
 
         console.log(response.data)
 
@@ -64,11 +73,27 @@ export default {
       } catch (err) {
         console.error(err)
       }
+    },
+    async createMookItems(){
+
+      try{
+
+        let item = this.generateItems()[0]
+
+        let response = await Api.post("/items", {
+          value: item.value,
+          label: item.label,
+        })
+
+        console.log(response.data)
+
+      }catch(err){
+        console.error(err)
+      }
     }
   },
-  created() {},
   mounted() {
-    this.items = this.loadItems();
+    this.items = this.generateItems();
   }
 };
 </script>
