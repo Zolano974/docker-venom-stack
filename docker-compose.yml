@@ -1,16 +1,32 @@
 version: "3"
 services:
 
-    kanopole_front:
+    kanopole-front:
         container_name: kanopole-front
         image: kanopole-vue:1.0
+        depends_on:
+            - kanopole-api
+        links:
+            - kanopole-api:kanopole-api
         ports:
             - "8001:8080"
         volumes:
             - ./kanopole-front/code:/app
-        tty: true
         networks:
             - kanopole
+        tty: true
+        restart: on-failure:10
+
+    kanopole-api:
+        container_name: kanopole-api
+        image: kanopole-api:1.0
+        ports:
+            - "8301:3000"
+        volumes:
+            - ./kanopole-api/code:/nest-api
+        networks:
+            - kanopole
+        tty: true
         restart: on-failure:10
 
 networks:

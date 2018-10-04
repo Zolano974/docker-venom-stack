@@ -10,44 +10,60 @@
             </li>
         </ul>
     </p>
+
+    <hr>
+
+    <div class="btn btn-default" @click="loadItemsFromApi">API call</div>
  
   </div>
 </template>
 
 <script>
-
+import axios from "axios";
+import options from "../config/axios-opt";
 
 export default {
-  name: 'Test',
-  data () {
+  name: "Test",
+  data() {
     return {
-      msg: 'Random Msg',
-      items: [],
-    }
+      msg: "Random Msg",
+      items: []
+    };
   },
   methods: {
-      loadItems(){
-          return [
-            {
-                value:10,
-                label: "yolo",
-            },
-            {
-                value:17,
-                label: "yoli",
-            },
-          ];
-      }
+    loadItems() {
+      return [
+        {
+          value: 10,
+          label: "yolo"
+        },
+        {
+          value: 17,
+          label: "yoli"
+        }
+      ];
+    },
+    loadItemsFromApi() {
+
+      axios(options)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+    }
   },
-  mounted(){
-      this.items = this.loadItems()
+  mounted() {
+    this.items = this.loadItems();
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
+h1,
+h2 {
   font-weight: normal;
 }
 ul {
