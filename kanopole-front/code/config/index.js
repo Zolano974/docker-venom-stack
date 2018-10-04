@@ -15,6 +15,8 @@ module.exports = {
     // Various Dev Server settings
     host: '0.0.0.0', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    // API_URL: 'http://localhost:53000/',
+    API_URL: 'http://kanopole-api:3000/',
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,

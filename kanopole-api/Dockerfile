@@ -2,7 +2,14 @@ FROM node:9.11.1-alpine
 
 RUN npm install -g nodemon
 
-WORKDIR /nest-api
+COPY ./entrypoint.sh /entrypoint/
+
+RUN chmod +x /entrypoint/entrypoint.sh
+
+WORKDIR /api
 
 EXPOSE 3000
-CMD ["nodemon"]
+
+ENTRYPOINT ["/entrypoint/entrypoint.sh"]
+
+CMD ["nodemon src/app.js"]
