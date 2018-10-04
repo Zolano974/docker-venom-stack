@@ -1,0 +1,1 @@
+docker run -it --rm --name kanopole-vue -p 8301:3000 kanopole-api:1.0

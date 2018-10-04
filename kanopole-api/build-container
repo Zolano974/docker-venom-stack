@@ -1,0 +1,1 @@
+docker build -t kanopole-api:1.0 .
