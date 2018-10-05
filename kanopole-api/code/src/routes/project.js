@@ -55,6 +55,7 @@ const projectRoutes = [
             cors: true
         }
     },
+  
     //UPDATE project (PUT)
     {
         method: 'PUT',
@@ -77,6 +78,7 @@ const projectRoutes = [
             cors: true
         }
     },
+ 
     //DELETE project
     {
         method: 'DELETE',

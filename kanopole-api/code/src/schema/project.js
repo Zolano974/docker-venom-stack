@@ -1,15 +1,15 @@
 const mongoose = require("mongoose")
-const FeatureSchema = require('../schema/feature')
+const Feature = require('../schema/feature')
 
 let Schema = mongoose.Schema;
 
-let ProjectSchema = new Schema({
+const ProjectSchema = new Schema({
     id: Number,
     title: String,
     description: String,
     objectives: String,
     cost: Number,
-    features: [FeatureSchema]
+    features: [Feature]
 })
 
 module.exports = ProjectSchema

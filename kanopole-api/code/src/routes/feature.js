@@ -1,14 +1,14 @@
-const service = require('../services/feature')
+const service = require('../services/project')
 const corsquery = require('../lib/corsquery')
 const Joi = require('joi') 	            //inputs validation
 
-const featureRoutes = [
+const projectFeatureRoutes = [
 
-    //GET FEATURES
+    //GET project's features
     {
         method: 'GET',
-        path: '/features',
-        handler: service.getAll,
+        path: '/project/{id}/features',
+        handler: service.getFeatures,
         config: {
             // auth: {
             //     strategy: 'token'
@@ -16,28 +16,12 @@ const featureRoutes = [
             cors: true
         }
     },
-    // GET feature /ID
-    {
-        method: 'GET',
-        path: '/feature/{id}',
-        handler: service.getById,
-        config: {
-            // auth: {
-            //     strategy: 'token'
-            // },
-            validate: {
-                params: {
-                    id: Joi.number().integer()
-                }
-            },
-            cors: true
-        }
-    },
-    //CREATE feature (POST)
+
+    //CREATE FEATURE on project (POST)
     {
         method: 'POST',
-        path: '/feature',
-        handler: service.create,
+        path: '/project/{id}/feature',
+        handler: service.addFeature,
         config: {
 
             // auth: {
@@ -55,11 +39,12 @@ const featureRoutes = [
             cors: true
         }
     },
-    //UPDATE feature (PUT)
+
+    //UPDATE feature on project (PUT)
     {
         method: 'PUT',
-        path: '/feature/{id}',
-        handler: service.update,
+        path: '/project/{id}/feature/{fid}',
+        handler: service.updateFeature,
         config: {
 
             // auth: {
@@ -68,6 +53,7 @@ const featureRoutes = [
             validate: {
                 params: {
                     id: Joi.number().integer().required(),
+                    fid: Joi.number().integer().required(),
                     title: Joi.string().alphanum().min(10).max(100).required(),
                     description: Joi.string().alphanum().min(10).max(100),
                     userValue: Joi.number().integer(),
@@ -77,11 +63,12 @@ const featureRoutes = [
             cors: true
         }
     },
-    //DELETE feature
+
+    //DELETE feature on project (DELETE)
     {
         method: 'DELETE',
-        path: '/feature/{id}',
-        handler: service.delete,
+        path: '/project/{id}/feature/{fid}',
+        handler: service.updateFeature,
         config: {
 
             // auth: {
@@ -90,22 +77,17 @@ const featureRoutes = [
             validate: {
                 params: {
                     id: Joi.number().integer().required(),
-                    title: Joi.string().alphanum().min(10).max(100).required(),
-                    description: Joi.string().alphanum().min(10).max(100),
-                    userValue: Joi.number().integer(),
-                    cost: Joi.number().integer(),
+                    fid: Joi.number().integer().required(),
                 }
             },
             cors: true
-
         }
     },
-
     
-    //OPTIONS feature
+    //OPTIONS project
     {
         method: 'OPTIONS',
-        path: '/features',
+        path: '/project/{id}/features',
         handler: (request, reply) => {
             corsquery.handle(reply)
         },
@@ -113,10 +95,10 @@ const featureRoutes = [
             cors: true
         }
     },
-    //OPTIONS feature
+    //OPTIONS project
     {
         method: 'OPTIONS',
-        path: '/feature',
+        path: '/project/{id}/feature',
         handler: (request, reply) => {
             corsquery.handle(reply)
         },
@@ -124,10 +106,10 @@ const featureRoutes = [
             cors: true
         }
     },
-    //OPTIONS feature
+    //OPTIONS project
     {
         method: 'OPTIONS',
-        path: '/feature/{id}',
+        path: '/project/{id}/feature/{fid}',
         handler: (request, reply) => {
             corsquery.handle(reply)
         },
@@ -137,4 +119,4 @@ const featureRoutes = [
     },
 ]
 
-module.exports = featureRoutes
+module.exports = projectFeatureRoutes

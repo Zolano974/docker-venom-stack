@@ -2,11 +2,11 @@ const private_key = require('../lib/privatekey') //PRIVATE KEY
 const jwt = require('jsonwebtoken') //JWT
 const Bcrypt = require('bcrypt') // encryption
 
-var mongoose = require("mongoose");
+let mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
     id: Number,
     username: String,
     password: String,

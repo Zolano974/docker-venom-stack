@@ -1,13 +1,14 @@
-var mongoose = require("mongoose")
+const mongoose = require("mongoose")
 
-var Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
-let FeatureSchema = new Schema({
+const FeatureSchema = new Schema({
     id: Number,
     title: String,
     description: String,
     userValue: Number,
-    cost: Number
+    cost: Number,
+    order: Number,
 })
 
 module.exports = FeatureSchema
