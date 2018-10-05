@@ -5,5 +5,6 @@ const projectFeatureRoutes = require('./routes/feature')
 
 const routes =  userRoutes                  //USERS
                 .concat(projectRoutes)      //PROJECTS
+                .concat(projectFeatureRoutes)      //PROJECTS
 
 module.exports = routes

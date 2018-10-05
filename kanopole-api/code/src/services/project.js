@@ -178,7 +178,6 @@ const service = {
         })
 
     },
-
     //DELETE
     delete: async (request, reply) => {
 
