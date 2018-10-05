@@ -41,4 +41,33 @@ StatsSchema.virtual('reverseRate').get(function(){
     return (this.reverse / this.total) * 100
 })
 
+/**
+ * Given the letter of the category, this setter increments the right counters
+ */
+StatsSchema.virtual('addAnswer').set(function(letter){
+
+    //we increment the total of answers
+    this.total ++
+    
+    //we increment the right category counter
+    if(letter == 'M'){
+        this.musthave ++
+    }
+    else if(letter == 'L'){
+        this.linear ++
+    }
+    else if(letter == 'E'){
+        this.exciter ++
+    }
+    else if(letter == 'Q'){
+        this.questionnable ++
+    }
+    else if(letter == 'I'){
+        this.indifferent ++
+    }
+    else if(letter == 'R'){
+        this.reverse ++
+    }
+})
+
 module.exports = FeatureSchema

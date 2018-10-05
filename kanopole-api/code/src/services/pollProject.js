@@ -1,4 +1,5 @@
 const PollProjectModel = require('../model/pollProject')
+const ProjectModel = require('../model/project')
 const PollFeatureModel = require('../model/pollFeature')
 
 const service = {
@@ -20,11 +21,17 @@ const service = {
                 error: err
             })
 
-            //we remove the re-add the pollFeature to update it
+            //we fetch the re-add the pollFeature to update it
             let feature = pollProject.features.id(fid)
+
+            //we use the custom setter to propagate answer and increment counters
+            feature.answer = {
+                functionnal: functionnalAnswer,
+                dysfunctionnal: dysfunctionnalAnswer
+            }
             
             // pollProject.features.push(...pollFeature)
-            pollProject.features.push(new PollFeatureModel(...pollFeature))
+            pollProject.features.push(feature)
 
             //we persist in DB
             pollProject.save(function(err){
@@ -95,17 +102,19 @@ const service = {
     //CREATE
     create: async (request, reply) => {
 
-        let entity = request.payload
+        let projectId = request.params.pid
 
-        PollProjectModel.create(...entity, function (err, pollProject) {
+        ProjectModel.findById(projectId, function (err, project) {
+
             if (err) reply({
                 error: err
             })
-            reply({
-                error: null,
-                data: pollProject
-            })
+
+
+            //TODO: initiate poll-project
+
         })
+
     },
     //UPDATE
     update: async (request, reply) => {
