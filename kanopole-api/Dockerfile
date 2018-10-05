@@ -12,4 +12,4 @@ EXPOSE 3000
 
 ENTRYPOINT ["/entrypoint/entrypoint.sh"]
 
-CMD ["nodemon src/app.js"]
+CMD ["nodemon start"]

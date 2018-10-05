@@ -1,21 +1,27 @@
 {
-  "name": "server",
+  "name": "kanopole-rest-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "kanopole REST node api",
+  "main": "server.js",
   "scripts": {
-    "start": "./node_modules/nodemon/bin/nodemon.js src/app.js",
+    "start": "nodemon server.js --exec babel-node --presets es2015,stage-2",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Zolano",
+  "license": "MIT",
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "cors": "^2.8.4",
-    "express": "^4.16.2",
-    "mongoose": "^5.0.2",
-    "morgan": "^1.9.0",
-    "nodemon": "^1.14.11"
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "bcrypt": "^1.0.2",
+    "date-and-time": "^0.5.0",
+    "formidable": "^1.1.1",
+    "fs": "0.0.1-security",
+    "hapi": "^16.5.2",
+    "hapi-auth-jwt": "^4.0.0",
+    "joi": "^10.6.0",
+    "jsonwebtoken": "^7.4.2",
+    "mongoose": "^5.3.1",
+    "nodemon": "^1.11.0"
   }
 }

@@ -51,7 +51,7 @@ export default {
       try {
         //TODO: pourquoi est-ce qu'on doit renseigner ici les coordonées FROM HOST, et pas le nom du service tel que défini dans le docker-compose.yml ???
         // let newItems = await Api.get('http://kanopole-api:3000/')
-        let response = await Api.get("/items");
+        let response = await Api.get("/item");
 
         console.log(response.data)
 
@@ -80,7 +80,7 @@ export default {
 
         let item = this.generateItems()[0]
 
-        let response = await Api.post("/items", {
+        let response = await Api.post("/item", {
           value: item.value,
           label: item.label,
         })
