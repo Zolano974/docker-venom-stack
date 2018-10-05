@@ -1,15 +1,6 @@
-var mongoose = require("mongoose")
+const mongoose = require('mongoose')
+const ProjectSchema = require('../schema/project')
 
-var Schema = mongoose.Schema;
+var Project = mongoose.model("Project", ProjectSchema)
 
-let ProjectSchema = new Schema({
-    id: Number,
-    title: String,
-    description: String,
-    objectives: Number,
-    cost: Number
-})
-
-var Feature = mongoose.model("Fetaure", FeatureSchema)
-
-module.exports = Feature
+module.exports = Project
