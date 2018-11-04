@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ msg }}</h1>
-    <h2>Proof of Concept</h2>
+    <h2>Proof of Concept BITCH</h2>
 
       <ul>
           <li v-for="item in items" :key="item.value">
