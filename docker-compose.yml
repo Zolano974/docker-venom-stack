@@ -1,24 +1,24 @@
 version: "3"
 services:
 
-    #frontend: Vue JS web app
-    #kanopole-front:
-    #    container_name: kanopole-front
-    #    image: kanopole-vue:1.0
-    #    depends_on:
-    #        - kanopole-api
-    #    links:
-    #        - kanopole-api:kanopole-api
-    #    ports:
-    #        - 58080:8080
-    #    volumes:
-    #        - ./kanopole-front/code:/app
-    #    environment:
-    #        - API_URL=http://localhost:53000/
-    #    networks:
-    #        - kanopole
-    #    tty: true
-    #    restart: on-failure:10
+    # frontend: Vue JS web app
+    kanopole-front:
+       container_name: kanopole-front
+       image: kanopole-vue:1.0
+       depends_on:
+           - kanopole-api
+       links:
+           - kanopole-api:kanopole-api
+       ports:
+           - 58080:8080
+       volumes:
+           - ./kanopole-front/code:/app
+       environment:
+           - API_URL=http://localhost:53000/
+       networks:
+           - kanopole
+       tty: true
+       restart: on-failure:10
 
     #backend: HapiJS REST API
     kanopole-api:
