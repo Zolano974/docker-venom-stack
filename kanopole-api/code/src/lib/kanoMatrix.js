@@ -4,7 +4,7 @@ const KanoMatrix = [][]; // i => functionnal question, j => dysfunctionnal quest
 
 /*                          DYSFUNCTIONAL
 FUNCTIONAL                 like (5)     | must be (4)   | neutral (3)   | live with (1)     | dislike (0)
-    like        (5)         Q           |      A        |    A          |     A             | O
+    like        (5)         Q           |      E        |    E          |     E             | L
     must be     (4)         R           |      I        |    I          |     I             | M
     neutral     (3)         R           |      I        |    I          |     I             | M
     live with   (2)         R           |      I        |    I          |     I             | M
