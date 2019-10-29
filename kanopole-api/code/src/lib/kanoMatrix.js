@@ -2,6 +2,18 @@
 const KanoMatrix = [][]; // i => functionnal question, j => dysfunctionnal question
 //cf https://www.justinmind.com/blog/kano-model-for-product-managers-beginners-guide/
 
+/*                          DYSFUNCTIONAL
+FUNCTIONAL                 like (5)     | must be (4)   | neutral (3)   | live with (1)     | dislike (0)
+    like        (5)         Q           |      A        |    A          |     A             | O
+    must be     (4)         R           |      I        |    I          |     I             | M
+    neutral     (3)         R           |      I        |    I          |     I             | M
+    live with   (2)         R           |      I        |    I          |     I             | M
+    dislike     (1)         R           |      R        |    R          |     R             | Q
+*/
+
+
+
+
 /**
  *  M => musqthave
  *  L => linear
