@@ -1,152 +1,118 @@
-const PollProjectModel = require('../model/pollProject')
-const ProjectModel = require('../model/project')
-const PollFeatureModel = require('../model/pollFeature')
+const PollProjectModel = require("../model/pollProject");
+const ProjectModel = require("../model/project");
+const PollFeatureModel = require("../model/pollFeature");
 
 const service = {
+  //UPDATE pollFeature
+  answerFeature: async (request, reply) => {
+    let id = request.params.id;
+    let fid = request.params.fid;
 
+    let functionnalAnswer = request.payload.functionnal;
+    let dysfunctionnalAnswer = request.payload.dysfunctionnal;
 
-    //UPDATE pollFeature
-    answerFeature: async (request, reply) => {
+    //we fetch the pollProject
+    PollProjectModel.findById(id, function(err, pollProject) {
+      if (err) reply({ error: err });
 
-        let id = request.params.id
-        let fid = request.params.fid
+      //we fetch the re-add the pollFeature to update it
+      let feature = pollProject.features.id(fid);
 
-        let functionnalAnswer = request.payload.functionnal
-        let dysfunctionnalAnswer = request.payload.dysfunctionnal
+      //we use the custom setter to propagate answer and increment counters
+      feature.answer = {
+        functionnal: functionnalAnswer,
+        dysfunctionnal: dysfunctionnalAnswer
+      };
 
-        //we fetch the pollProject
-        PollProjectModel.findById(id, function (err, pollProject) {
+      // pollProject.features.push(...pollFeature)
+      pollProject.features.push(feature);
 
-            if (err) reply({
-                error: err
-            })
+      //we persist in DB
+      pollProject.save(function(err) {
+        if (err) reply({ error: err });
+        reply({
+          error: null,
+          data: pollProject
+        });
+      });
+    });
+  },
 
-            //we fetch the re-add the pollFeature to update it
-            let feature = pollProject.features.id(fid)
+  getFeatures: async (request, reply) => {
+    let id = request.params.id;
 
-            //we use the custom setter to propagate answer and increment counters
-            feature.answer = {
-                functionnal: functionnalAnswer,
-                dysfunctionnal: dysfunctionnalAnswer
-            }
-            
-            // pollProject.features.push(...pollFeature)
-            pollProject.features.push(feature)
+    //we fetch the pollProject
+    PollProjectModel.findById(id, function(err, pollProject) {
+      if (err) reply({ error: err });
 
-            //we persist in DB
-            pollProject.save(function(err){
-                if(err) reply({
-                    error: err
-                })
-                reply({
-                    error: null,
-                    data: pollProject
-                })
-            })
+      reply({
+        error: null,
+        data: pollProject.features
+      });
+    });
+  },
 
-        })
+  //GET ALL
+  getAll: async (request, reply) => {
+    PollProjectModel.find({}, function(err, pollProjects) {
+      if (err) reply({ error: err });
 
-    },
-   
-    getFeatures: async (request, reply) => {
-        
-        let id = request.params.id
+      reply({
+        error: null,
+        data: pollProjects
+      });
+    });
+  },
+  //GET BY ID
+  getById: async (request, reply) => {
+    let id = request.params.id;
 
-         //we fetch the pollProject
-         PollProjectModel.findById(id, function (err, pollProject) {
+    PollProjectModel.findById(id, function(err, pollProject) {
+      if (err) reply({ error: err });
 
-            if (err) reply({
-                error: err
-            })
+      reply({
+        error: null,
+        data: pollProject
+      });
+    });
+  },
+  //CREATE
+  create: async (request, reply) => {
+    let projectId = request.params.pid;
 
-            reply({
-                error: null,
-                data: pollProject.features
-            })
+    ProjectModel.findById(projectId, function(err, project) {
+      if (err) reply({ error: err });
 
-        })
-    },
+      //TODO: initiate poll-project
+    });
+  },
+  //UPDATE
+  update: async (request, reply) => {
+    let entity = request.payload;
 
-    //GET ALL
-    getAll: async (request, reply) => {
+    PollProjectModel.findOneAndUpdate(...entity, ...entity, function(
+      err,
+      pollProject
+    ) {
+      if (err) reply({ error: err });
+      reply({
+        error: null,
+        data: pollProject
+      });
+    });
+  },
+  //DELETE
+  delete: async (request, reply) => {
+    let entity = request.payload;
 
-        PollProjectModel.find({}, function (err, pollProjects) {
+    PollProjectModel.deleteOne(...entity, function(err) {
+      if (err) reply({ error: err });
+      reply({
+        error: null,
+        data: true
+      });
+    });
+  }
+};
 
-            if (err) reply({
-                error: err
-            })
-
-            reply({
-                error: null,
-                data: pollProjects
-            })
-        })
-    },
-    //GET BY ID
-    getById: async (request, reply) => {
-
-        let id = request.params.id
-
-        PollProjectModel.findById(id, function (err, pollProject) {
-
-            if (err) reply({
-                error: err
-            })
-
-            reply({
-                error: null,
-                data: pollProject
-            })
-        })
-    },
-    //CREATE
-    create: async (request, reply) => {
-
-        let projectId = request.params.pid
-
-        ProjectModel.findById(projectId, function (err, project) {
-
-            if (err) reply({
-                error: err
-            })
-
-
-            //TODO: initiate poll-project
-
-        })
-
-    },
-    //UPDATE
-    update: async (request, reply) => {
-
-        let entity = request.payload
-
-        PollProjectModel.findOneAndUpdate(...entity, ...entity, function (err, pollProject) {
-            if (err) reply({
-                error: err
-            })
-            reply({
-                error: null,
-                data: pollProject
-            })
-        })
-
-    },
-    //DELETE
-    delete: async (request, reply) => {
-
-        let entity = request.payload
-
-        PollProjectModel.deleteOne(...entity, function (err) {
-            if (err) reply({
-                error: err
-            })
-            reply({
-                error: null,
-                data: true
-            })
-        })
-    },
-}
-
-module.exports = service
+module.exports = service;
