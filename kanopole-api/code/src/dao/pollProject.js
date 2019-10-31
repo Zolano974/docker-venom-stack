@@ -19,4 +19,4 @@ var PollProject = mongoose.model("PollProject", PollProjectSchema)
 
 //export model and schema
 exports.PollProjectSchema = PollProjectSchema
-exports.PollProjectDao = PollProject
+exports.PollProjectModel = PollProject

@@ -19,4 +19,4 @@ var Project = mongoose.model("Project", ProjectSchema);
 
 //export schema
 exports.ProjectSchema = ProjectSchema
-exports.ProjectDao = Project
+exports.ProjectModel = Project

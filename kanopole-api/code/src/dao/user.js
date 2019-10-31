@@ -57,4 +57,4 @@ var User = mongoose.model("User", UserSchema);
 
 //export model and schema
 exports.UserSchema = UserSchema
-exports.UserDao = User
+exports.UserModel = User

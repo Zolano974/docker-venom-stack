@@ -17,4 +17,4 @@ const Feature = mongoose.model("Feature", FeatureSchema)
 
 //export model and schema
 exports.FeatureSchema = FeatureSchema
-exports.FeatureDao = Feature
+exports.FeatureModel = Feature

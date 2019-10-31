@@ -1,5 +1,5 @@
-const {ProjectDao} = require("../dao/project");
-const {FeatureDao} = require("../dao/feature");
+const {ProjectModel} = require("../dao/project");
+const {FeatureModel} = require("../dao/feature");
 
 const service = {
   //ADD FEATURE
@@ -8,12 +8,12 @@ const service = {
     let feature = request.payload;
 
     //we fetch the project
-    ProjectDao.findById(id, function(err, project) {
+    ProjectModel.findById(id, function(err, project) {
       if (err) reply({ error: err });
 
       //we add the feature as child
       // project.features.push(...feature)
-      project.features.push(new FeatureDao(...feature));
+      project.features.push(new FeatureModel(...feature));
 
       //we persist in DB
       project.save(function(err) {
@@ -36,12 +36,12 @@ const service = {
     let feature = request.payload;
 
     //we fetch the project
-    ProjectDao.findById(id, function(err, project) {
+    ProjectModel.findById(id, function(err, project) {
       if (err) reply({ error: err });
       //we remove the re-add the feature to update it
       project.features.id(fid).remove();
       // project.features.push(...feature)
-      project.features.push(new FeatureDao(...feature));
+      project.features.push(new FeatureModel(...feature));
 
       //we persist in DB
       project.save(function(err) {
@@ -62,7 +62,7 @@ const service = {
     let fid = request.params.fid;
 
     //we fetch the project
-    ProjectDao.findById(id, function(err, project) {
+    ProjectModel.findById(id, function(err, project) {
       if (err) reply({ error: err });
       //we remove the re-add the feature to update it
       project.features.id(fid).remove();
@@ -84,7 +84,7 @@ const service = {
     let id = request.params.id;
 
     //we fetch the project
-    ProjectDao.findById(id, function(err, project) {
+    ProjectModel.findById(id, function(err, project) {
       if (err) reply({ error: err });
       reply({
         error: null,
@@ -94,7 +94,7 @@ const service = {
   },
   //GET ALL
   getAll: async (request, reply) => {
-    ProjectDao.find({}, function(err, projects) {
+    ProjectModel.find({}, function(err, projects) {
       if (err) reply({ error: err });
 
       reply({
@@ -107,7 +107,7 @@ const service = {
   getById: async (request, reply) => {
     let id = request.params.id;
 
-    ProjectDao.findById(id, function(err, project) {
+    ProjectModel.findById(id, function(err, project) {
       if (err) reply({ error: err });
 
       reply({
@@ -120,7 +120,7 @@ const service = {
   create: async (request, reply) => {
     let entity = request.payload;
 
-    ProjectDao.create(...entity, function(err, project) {
+    ProjectModel.create(...entity, function(err, project) {
       if (err) reply({ error: err });
       reply({
         error: null,
@@ -132,7 +132,7 @@ const service = {
   update: async (request, reply) => {
     let entity = request.payload;
 
-    ProjectDao.findOneAndUpdate(...entity, ...entity, function(err, project) {
+    ProjectModel.findOneAndUpdate(...entity, ...entity, function(err, project) {
       if (err) reply({ error: err });
       reply({
         error: null,
@@ -144,7 +144,7 @@ const service = {
   delete: async (request, reply) => {
     let entity = request.payload;
 
-    ProjectDao.deleteOne(...entity, function(err) {
+    ProjectModel.deleteOne(...entity, function(err) {
       if (err) reply({ error: err });
       reply({
         error: null,

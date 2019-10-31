@@ -30,4 +30,4 @@ var PollFeature = mongoose.model("PollFeature", PollFeatureSchema)
 
 //export model and schema
 exports.PollFeatureSchema = PollFeatureSchema;
-exports.PollFeatureDao = PollFeature;
+exports.PollFeatureModel = PollFeature;
