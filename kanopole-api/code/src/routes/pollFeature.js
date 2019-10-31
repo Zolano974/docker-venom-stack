@@ -32,8 +32,8 @@ const projectFeatureRoutes = [
                 params: {
                     id: Joi.number().integer().required(),
                     fid: Joi.number().integer().required(),
-                    functionnal: Joi.boolean().min(1).max(5).required(),
-                    dysfunctionnal: Joi.boolean().min(1).max(5).required(),
+                    functionnal: Joi.number().min(1).max(5).required(),
+                    dysfunctionnal: Joi.number().min(1).max(5).required(),
                 }
             },
             cors: true
