@@ -11,7 +11,7 @@
 
     <hr>
 
-    <div class="btn btn-default" @click="loadItemsFromApi">GET API items</div>
+    <div class="button is-primary" @click="loadItemsFromApi">GET API items</div>
 
     <hr>
 

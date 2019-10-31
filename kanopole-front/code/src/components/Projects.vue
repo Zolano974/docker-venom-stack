@@ -10,11 +10,7 @@
 
         <hr>
 
-        <div class="btn btn-default" @click="loadItemsFromApi">GET API items</div>
-
-        <hr>
-
-        <div class="btn btn-default" @click="createMookItems">CREATE API item</div>
+        <!-- TODO: v-for sur project -->
 
     
     </div>

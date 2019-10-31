@@ -1,24 +1,10 @@
     <template>
     <div>
-        <h1>Projects list</h1>
+        <h1>{{ title }}</h1>
 
-        <ul>
-            <li v-for="item in items" :key="item.value">
-                <b>{{ item.value }}</b> => <i>{{ item.label }}</i>
-            </li>
-        </ul>
-
-        <hr>
-
-        <div class="btn btn-default" @click="loadItemsFromApi">GET API items</div>
-
-        <hr>
-
-        <div class="btn btn-default" @click="createMookItems">CREATE API item</div>
-
-    
+        <!-- TODO: v-for sur project -->
     </div>
-    </template>
+    </template>§
 
     <script>
 
