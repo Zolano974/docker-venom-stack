@@ -64,6 +64,5 @@ StatsSchema.virtual("addAnswer").set(function(letter) {
   }
 });
 
-//export model
-var Stats = mongoose.model("Stat", StatsSchema)
-module.exports = Stats;
+//export schema
+exports.StatsSchema = StatsSchema;

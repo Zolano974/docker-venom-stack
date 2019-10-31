@@ -1,6 +1,6 @@
-const PollProjectModel = require("../model/pollProject");
-const ProjectModel = require("../model/project");
-const PollFeatureModel = require("../model/pollFeature");
+const {PollProjectDao} = require("../dao/pollProject");
+const {ProjectDao} = require("../dao/project");
+const {PollFeatureDao} = require("../dao/pollFeature");
 
 const service = {
   //UPDATE pollFeature
@@ -12,7 +12,7 @@ const service = {
     let dysfunctionnalAnswer = request.payload.dysfunctionnal;
 
     //we fetch the pollProject
-    PollProjectModel.findById(id, function(err, pollProject) {
+    PollProjectDao.findById(id, function(err, pollProject) {
       if (err) reply({ error: err });
 
       //we fetch the re-add the pollFeature to update it
@@ -42,7 +42,7 @@ const service = {
     let id = request.params.id;
 
     //we fetch the pollProject
-    PollProjectModel.findById(id, function(err, pollProject) {
+    PollProjectDao.findById(id, function(err, pollProject) {
       if (err) reply({ error: err });
 
       reply({
@@ -54,7 +54,7 @@ const service = {
 
   //GET ALL
   getAll: async (request, reply) => {
-    PollProjectModel.find({}, function(err, pollProjects) {
+    PollProjectDao.find({}, function(err, pollProjects) {
       if (err) reply({ error: err });
 
       reply({
@@ -67,7 +67,7 @@ const service = {
   getById: async (request, reply) => {
     let id = request.params.id;
 
-    PollProjectModel.findById(id, function(err, pollProject) {
+    PollProjectDao.findById(id, function(err, pollProject) {
       if (err) reply({ error: err });
 
       reply({
@@ -80,7 +80,7 @@ const service = {
   create: async (request, reply) => {
     let projectId = request.params.pid;
 
-    ProjectModel.findById(projectId, function(err, project) {
+    ProjectDao.findById(projectId, function(err, project) {
       if (err) reply({ error: err });
 
       //TODO: initiate poll-project
@@ -90,7 +90,7 @@ const service = {
   update: async (request, reply) => {
     let entity = request.payload;
 
-    PollProjectModel.findOneAndUpdate(...entity, ...entity, function(
+    PollProjectDao.findOneAndUpdate(...entity, ...entity, function(
       err,
       pollProject
     ) {
@@ -105,7 +105,7 @@ const service = {
   delete: async (request, reply) => {
     let entity = request.payload;
 
-    PollProjectModel.deleteOne(...entity, function(err) {
+    PollProjectDao.deleteOne(...entity, function(err) {
       if (err) reply({ error: err });
       reply({
         error: null,

@@ -1,10 +1,10 @@
-const UserModel = require("../model/user");
+const {UserDao} = require("../dao/user");
 const corsquery = require("../lib/corsquery");
 
 const service = {
   //GET ALL
   getAll: async (request, reply) => {
-    UserModel.find({}, function(err, users) {
+    UserDao.find({}, function(err, users) {
       if (err) reply({ error: err });
 
       reply({
@@ -17,7 +17,7 @@ const service = {
   getById: async (request, reply) => {
     let id = request.params.id;
 
-    UserModel.findById(id, function(err, user) {
+    UserDao.findById(id, function(err, user) {
       if (err) reply({ error: err });
 
       reply({
@@ -41,7 +41,7 @@ const service = {
       mail: entity.mail
     };
 
-    UserModel.create(...newUser, function(err, user) {
+    UserDao.create(...newUser, function(err, user) {
       if (err) reply({ error: err });
       reply({
         error: null,
@@ -53,7 +53,7 @@ const service = {
   update: async (request, reply) => {
     let entity = request.payload;
 
-    UserModel.findOneAndUpdate(...entity, ...entity, function(err, user) {
+    UserDao.findOneAndUpdate(...entity, ...entity, function(err, user) {
       if (err) reply({ error: err });
       reply({
         error: null,
@@ -66,7 +66,7 @@ const service = {
   delete: async (request, reply) => {
     let entity = request.payload;
 
-    UserModel.deleteOne(...entity, function(err) {
+    UserDao.deleteOne(...entity, function(err) {
       if (err) reply({ error: err });
       reply({
         error: null,
@@ -87,7 +87,7 @@ const service = {
     const { username, password } = request.payload;
 
     try {
-      var token = await UserModel.authenticate(username, password);
+      var token = await UserDao.authenticate(username, password);
 
       var response = token
         ? {

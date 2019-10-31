@@ -1,4 +1,4 @@
-const private_key = require('../lib/privatekey') //PRIVATE KEY
+const private_key = require('../../lib/privatekey') //PRIVATE KEY
 const jwt = require('jsonwebtoken') //JWT
 const Bcrypt = require('bcrypt') // encryption
 
@@ -52,7 +52,9 @@ UserSchema.statics.authenticate = function (username, password) {
 
 }
 
-
-//export model
+//model
 var User = mongoose.model("User", UserSchema);
-module.exports = User
+
+//export model and schema
+exports.UserSchema = UserSchema
+exports.UserDao = User

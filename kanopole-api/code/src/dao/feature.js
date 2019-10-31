@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 let Schema = mongoose.Schema;
 
+//schema
 const FeatureSchema = new Schema({
     id: Number,
     title: String,
@@ -11,6 +12,9 @@ const FeatureSchema = new Schema({
     order: Number,
 })
 
-//export model
-var Feature = mongoose.model("Feature", FeatureSchema)
-module.exports = Feature
+//model
+const Feature = mongoose.model("Feature", FeatureSchema)
+
+//export model and schema
+exports.FeatureSchema = FeatureSchema
+exports.FeatureDao = Feature

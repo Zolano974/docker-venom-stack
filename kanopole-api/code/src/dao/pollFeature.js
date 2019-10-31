@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
-const Feature = require("./feature");
-const Stats = require("./stats");
+const {FeatureSchema} = require("./feature");
+const {StatsSchema} = require("./stats");
 
 const KanoMatrix = require("../lib/kanoMatrix");
 
 let Schema = mongoose.Schema;
 
+//schema
 const PollFeatureSchema = new Schema({
   id: Number,
-  feature: Feature,
-  stats: Stats
+  feature: FeatureSchema,
+  stats: StatsSchema
 });
 
 /**
@@ -24,6 +25,9 @@ PollFeatureSchema.virtual("answer").set(function(answers) {
   this.stats.addAnswer = stringResult;
 });
 
-//export model
+//model
 var PollFeature = mongoose.model("PollFeature", PollFeatureSchema)
-module.exports = PollFeature;
+
+//export model and schema
+exports.PollFeatureSchema = PollFeatureSchema;
+exports.PollFeatureDao = PollFeature;
