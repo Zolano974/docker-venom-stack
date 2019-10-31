@@ -4,6 +4,7 @@ const corsquery = require("../lib/corsquery");
 const Joi = require("joi"); //inputs validation
 
 const userRoutes = [
+    
   //AUTHENTICATE
   {
     path: "/auth",

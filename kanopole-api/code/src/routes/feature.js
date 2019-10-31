@@ -16,6 +16,23 @@ const projectFeatureRoutes = [
     }
   },
 
+  {
+    method: 'GET',
+    handler: service.addFeature,
+    config: {
+    //auth: {
+      //strategy: 'token'
+    //},
+      validate: {
+        params: {
+          id: Joi.number().integer(),
+          title: Joi.string().alphanum().min().max.required(),
+        }
+      },
+      cors: true
+   }
+  },
+
   //CREATE FEATURE on project (POST)
   {
     method: "POST",

@@ -21,7 +21,7 @@
  *  R => reverse (incoherent)
  */
 //                 i  j  
-const KanoMatrix = [][]; // i => functionnal question, j => dysfunctionnal question
+const KanoMatrix = []; // i => functionnal question, j => dysfunctionnal question
 
 //1st line in kano matrix
 KanoMatrix[5][5] = 'Q';

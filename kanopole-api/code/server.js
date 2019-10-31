@@ -1,20 +1,16 @@
 'use strict';
 
-const Hapi = require('hapi')	                //REST API framework
-
-const HapiAuthJwt = require('hapi-auth-jwt')   //auth JWT
-
-const jwt = require('jsonwebtoken')            //JWT
-
+const Hapi = require('hapi')	                    //REST API framework
+const HapiAuthJwt = require('hapi-auth-jwt')        //auth JWT
+const jwt = require('jsonwebtoken')                 //JWT
 const routes = require('./src/routes')              //Routes
-
-const private_key = require('./src/lib/privatekey')     //privatekey
+const private_key = require('./src/lib/privatekey') //privatekey
+const mongoose = require('mongoose')                //dbh for mongoDB
 
 // Create a server with a host and port
 const server = new Hapi.Server();
 
-//dbh for mongoDB
-const mongoose = require('mongoose')
+
 
 var DATABASE_URL = process.env.DATABASE_URL || 'http://localhost'
 mongoose.connect(`mongodb://${DATABASE_URL}/kanopole`);
